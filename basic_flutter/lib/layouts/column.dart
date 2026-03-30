@@ -5,17 +5,14 @@ class ColumnEx extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
         children: [ 
-          Text("Hola, soy Adrian."),
-          Text("Hola, soy Adrian."),
-          Text("Hola, soy Adrian."),
-          Text("Hola, soy Adrian."),
+          Text("San Antonio Spurs"),
         ],
       ),
     ); 

@@ -18,14 +18,16 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.black,
           foregroundColor: Colors.white,
           title: Text("Mi aplicación"),
-          actions: [IconButton(onPressed: (){}, icon: Icon(Icons.sports_basketball))],
+          actions: [
+            IconButton(onPressed: () {}, icon: Icon(Icons.sports_basketball)),
+          ],
         ),
         body: ImageEx(),
-        backgroundColor: Colors.white,
         floatingActionButton: FloatingButton(),
       ),
     );
