@@ -81,10 +81,12 @@ class _ImcHomeScreenState extends State<ImcHomeScreen> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ImcResultScreen(
-                    height: selectedHeight,
-                    weight: selectedWeight,
-                  )),
+                  MaterialPageRoute(
+                    builder: (context) => ImcResultScreen(
+                      height: selectedHeight,
+                      weight: selectedWeight,
+                    ),
+                  ),
                 );
               },
               style: ButtonStyle(
