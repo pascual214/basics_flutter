@@ -17,11 +17,11 @@ class ImcResultScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColor.background,
       appBar: toolbarResult(),
-      body: bodyResult(),
+      body: bodyResult(context),
     );
   }
 
-  Padding bodyResult() {
+  Padding bodyResult(context) {
     double fixedHeight = height / 100;
     double imcResult = weight / (fixedHeight * fixedHeight);
 
@@ -80,12 +80,14 @@ class ImcResultScreen extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 55),
+            padding: const EdgeInsets.only(bottom: 39),
             child: SizedBox(
               height: 60,
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context);
+                },
                 style: ButtonStyle(
                   shape: WidgetStateProperty.all(
                     RoundedRectangleBorder(
