@@ -11,8 +11,7 @@ class SuperheroSearchScreen extends StatefulWidget {
 }
 
 class _SuperheroSearchScreenState extends State<SuperheroSearchScreen> {
-
-  Future <SuperheroResponse?>? _superheroInfo;
+  Future<SuperheroResponse?>? _superheroInfo;
   Repository repository = Repository();
 
   @override
@@ -40,19 +39,39 @@ class _SuperheroSearchScreenState extends State<SuperheroSearchScreen> {
               },
             ),
           ),
-          FutureBuilder(future: _superheroInfo, builder: (context, snapshot) {
-            if(snapshot.connectionState == ConnectionState.waiting){
-              return CircularProgressIndicator();
-            } else if (snapshot.hasError){
-              return Text("Error:  ${snapshot.error}");
-            } else if (snapshot.hasData) {
-              return Text("${snapshot.data?.response}");
-            } else {
-              return Text("No hay resultados");
-            }
-          })
+          bodyList(),
         ],
       ),
     );
+  }
+
+
+  FutureBuilder<SuperheroResponse?> bodyList() {
+    return FutureBuilder(
+          future: _superheroInfo,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return CircularProgressIndicator();
+            } else if (snapshot.hasError) {
+              return Text("Error:  ${snapshot.error}");
+            } else if (snapshot.hasData) {
+              var superheroList = snapshot.data?.result;
+              return Expanded(
+                child: ListView.builder(
+                  itemCount: superheroList?.length ?? 0,
+                  itemBuilder: (context, index) {
+                    if(superheroList != null) {
+                      return Text(superheroList[index].name);
+                    } else {
+                      return Text("No se puede jeje");
+                    }
+                  },
+                ),
+              );
+            } else {
+              return Text("No hay resultados");
+            }
+          },
+        );
   }
 }
