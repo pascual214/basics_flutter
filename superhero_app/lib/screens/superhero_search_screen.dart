@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:superhero_app/core/app_color.dart';
+import 'package:superhero_app/data/model/superhero_detail_response.dart';
 import 'package:superhero_app/data/model/superhero_response.dart';
 import 'package:superhero_app/data/repository.dart';
+import 'package:superhero_app/screens/superhero_detail_screen.dart';
 
 class SuperheroSearchScreen extends StatefulWidget {
   const SuperheroSearchScreen({super.key});
@@ -13,6 +15,7 @@ class SuperheroSearchScreen extends StatefulWidget {
 class _SuperheroSearchScreenState extends State<SuperheroSearchScreen> {
   Future<SuperheroResponse?>? _superheroInfo;
   Repository repository = Repository();
+  bool _isTextEmpty = true;
 
   @override
   Widget build(BuildContext context) {
@@ -34,22 +37,24 @@ class _SuperheroSearchScreenState extends State<SuperheroSearchScreen> {
               ),
               onChanged: (text) {
                 setState(() {
+                  _isTextEmpty = text.isEmpty;
                   _superheroInfo = repository.fetchSuperheroInfo(text);
                 });
               },
             ),
           ),
-          bodyList(),
+          bodyList(_isTextEmpty),
         ],
       ),
     );
   }
 
 
-  FutureBuilder<SuperheroResponse?> bodyList() {
+  FutureBuilder<SuperheroResponse?> bodyList(bool _isTextEmpty) {
     return FutureBuilder(
           future: _superheroInfo,
           builder: (context, snapshot) {
+            if( _isTextEmpty) return Text("Introduce un nombre");
             if (snapshot.connectionState == ConnectionState.waiting) {
               return CircularProgressIndicator();
             } else if (snapshot.hasError) {
@@ -61,7 +66,7 @@ class _SuperheroSearchScreenState extends State<SuperheroSearchScreen> {
                   itemCount: superheroList?.length ?? 0,
                   itemBuilder: (context, index) {
                     if(superheroList != null) {
-                      return Text(superheroList[index].name);
+                      return itemSuperhero(superheroList[index]);
                     } else {
                       return Text("No se puede jeje");
                     }
@@ -74,4 +79,20 @@ class _SuperheroSearchScreenState extends State<SuperheroSearchScreen> {
           },
         );
   }
+
+  Padding itemSuperhero(SuperheroDetailResponse item) => Padding(
+    padding: const EdgeInsets.only(left: 16, right: 16, top: 6, bottom: 6),
+    child: GestureDetector(
+      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SuperheroDetailScreen(superhero: item))),
+      child: Container(
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: AppColor.primary),
+        child: Column(
+          children: [
+            // Image.network(item.url),
+            Text(item.name, style: TextStyle(fontSize: 28, fontWeight: FontWeight.w400, color: Colors.black),)
+          ],
+        ),
+      ),
+    ),
+  );
 }

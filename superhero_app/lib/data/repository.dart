@@ -4,12 +4,18 @@ import 'package:superhero_app/data/model/superhero_response.dart';
 import 'package:http/http.dart' as http;
 
 class Repository {
-  Future<SuperheroResponse?> fetchSuperheroInfo(String name) async{
-    final response = await http.get(Uri.parse("https://superheroapi.com/api/8297c038420d19f9fde62b2128511cdf/search/$name"));
-  
-    if(response.statusCode == 200) {
+  Future<SuperheroResponse?> fetchSuperheroInfo(String name) async {
+    final response = await http.get(
+      Uri.parse(
+        "https://superheroapi.com/api/8297c038420d19f9fde62b2128511cdf/search/$name",
+      ),
+    );
+
+    if (response.statusCode == 200) {
       var decodedJson = jsonDecode(response.body);
-      SuperheroResponse superheroResponse = SuperheroResponse.fromJson(decodedJson);
+      SuperheroResponse superheroResponse = SuperheroResponse.fromJson(
+        decodedJson,
+      );
       return superheroResponse;
     } else {
       return null;
