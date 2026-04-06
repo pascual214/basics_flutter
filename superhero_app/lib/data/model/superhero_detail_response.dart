@@ -42,13 +42,20 @@ class PowerstatsResponse {
   });
 
   factory PowerstatsResponse.fromJson(Map<String, dynamic> json) {
-    return PowerstatsResponse(
-      intelligence: json["intelligence"],
-      strength: json["strength"],
-      speed: json["speed"],
-      durability: json["durability"],
-      power: json["power"],
-      combat: json["combat"],
-    );
+  String parseStat(dynamic value) {
+    if (value == null) return '0';
+    if (value.toString().toLowerCase() == 'null') return '0';
+    if (value.toString().toLowerCase() == 'n/a') return '0';
+    return value.toString();
   }
+
+  return PowerstatsResponse(
+    intelligence: parseStat(json["intelligence"]),
+    strength: parseStat(json["strength"]),
+    speed: parseStat(json["speed"]),
+    durability: parseStat(json["durability"]),
+    power: parseStat(json["power"]),
+    combat: parseStat(json["combat"]),
+  );
+}
 }

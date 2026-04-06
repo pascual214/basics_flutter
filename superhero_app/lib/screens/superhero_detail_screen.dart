@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:superhero_app/core/app_color.dart';
 import 'package:superhero_app/data/model/superhero_detail_response.dart';
 
 class SuperheroDetailScreen extends StatelessWidget {
@@ -9,11 +10,19 @@ class SuperheroDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Superhero ${superhero.name}")),
+      appBar: AppBar(
+        title: Text("Superheroe: ${superhero.name}"),
+        backgroundColor: AppColor.primary,
+        foregroundColor: Colors.black,
+      ),
       body: Center(
         child: Column(
           children: [
-            Text(superhero.realName, style: TextStyle(fontSize: 28)),
+            Text(
+              superhero.name,
+              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+            ),
+            Text(superhero.realName, style: TextStyle(fontSize: 14)),
             Padding(
               padding: const EdgeInsets.only(left: 16, right: 16),
               child: SizedBox(
@@ -25,6 +34,10 @@ class SuperheroDetailScreen extends StatelessWidget {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
+                        Text(
+                          superhero.powerstatsResponse.power,
+                          style: TextStyle(color: Colors.grey),
+                        ),
                         Container(
                           height: double.parse(
                             superhero.powerstatsResponse.power,
@@ -38,6 +51,10 @@ class SuperheroDetailScreen extends StatelessWidget {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
+                        Text(
+                          superhero.powerstatsResponse.strength,
+                          style: TextStyle(color: Colors.grey),
+                        ),
                         Container(
                           height: double.parse(
                             superhero.powerstatsResponse.strength,
@@ -51,6 +68,10 @@ class SuperheroDetailScreen extends StatelessWidget {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
+                        Text(
+                          superhero.powerstatsResponse.intelligence,
+                          style: TextStyle(color: Colors.grey),
+                        ),
                         Container(
                           height: double.parse(
                             superhero.powerstatsResponse.intelligence,
@@ -64,6 +85,10 @@ class SuperheroDetailScreen extends StatelessWidget {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
+                        Text(
+                          superhero.powerstatsResponse.durability,
+                          style: TextStyle(color: Colors.grey),
+                        ),
                         Container(
                           height: double.parse(
                             superhero.powerstatsResponse.durability,
@@ -77,6 +102,11 @@ class SuperheroDetailScreen extends StatelessWidget {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
+                        Text(
+                          superhero.powerstatsResponse.combat,
+                          style: TextStyle(color: Colors.grey),
+                        ),
+
                         Container(
                           height: double.parse(
                             superhero.powerstatsResponse.combat,

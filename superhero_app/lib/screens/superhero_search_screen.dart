@@ -88,6 +88,7 @@ class _SuperheroSearchScreenState extends State<SuperheroSearchScreen> {
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: AppColor.primary),
         child: Column(
           children: [
+            // Text(item.url),
             Text(item.name, style: TextStyle(fontSize: 28, fontWeight: FontWeight.w400, color: Colors.black),)
           ],
         ),
